@@ -6,8 +6,6 @@ using UnityEngine;
 public class Movement : MonoBehaviour {
     [SerializeField]
     private float speed;
-    [SerializeField]
-    private Joystick movementInput;
     private CharacterController controller;
 
     private Vector3 movementDirection;
@@ -28,7 +26,7 @@ public class Movement : MonoBehaviour {
         forwardDirection = transform.TransformDirection(Vector3.forward);
         sideDirection = transform.TransformDirection(Vector3.right);
 
-        movementDirection = (forwardDirection * movementInput.Vertical) + (sideDirection * movementInput.Horizontal);
+        movementDirection = (forwardDirection * JoystickInfo.get.ForwardWalking) + (sideDirection * JoystickInfo.get.SideWalking);
 
         controller.Move(movementDirection * speed * Time.deltaTime);
     }
